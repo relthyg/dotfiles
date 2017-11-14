@@ -1,0 +1,4 @@
+if [ -f "$HOME/.exports" ]; then
+    . "$HOME/.exports"
+fi
+
