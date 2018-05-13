@@ -42,9 +42,9 @@ syntax on " Use syntax highlighting
 " if has('gui_running')
 let base16colorspace=256
 " set background=light
-" colorscheme base16-google-dark
+" colorscheme base16-atelier-forest
 if has("gui_gtk2")
-    set guifont=Liberation\ Mono\ 11
+    set guifont=Noto\ Mono\ 10
 endif
 " endif
 
