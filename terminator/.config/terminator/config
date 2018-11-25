@@ -16,7 +16,6 @@
   [[default]]
     background_color = "#3c3c3c"
     background_darkness = 0.9
-    background_type = transparent
     cursor_color = "#aaaaaa"
     font = Liberation Mono 11
     foreground_color = "#ffffff"
