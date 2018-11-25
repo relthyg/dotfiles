@@ -1,8 +1,13 @@
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
-      *) return;;
+    *) return;;
 esac
+
+# PATHs
+if [ -f "$HOME/.exports" ]; then
+    . "$HOME/.exports"
+fi
 
 # Aliases
 if [ -f ~/.bash_aliases ]; then
@@ -35,13 +40,27 @@ fi
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
+    xterm*|rxvt*)
+        PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+        ;;
+    *)
+        ;;
 esac
 
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
+#taking notes
+n() {
+    vim ~/owncloud/notes/"$*".md
+}
+
+ncat() {
+    cat ~/owncloud/notes/"$*".md
+}
+
+nls() {
+    ls -c ~/owncloud/notes/ | grep "$*"
+}
+
+setxkbmap -option "caps:swapescape"

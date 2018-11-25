@@ -15,4 +15,5 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias radio='mplayer -cache 1000 -playlist'
 alias lndp='aptitude search "?narrow(?installed,?not(?origin(Debian)))" | sed "s/^i\sA*\s//" | cut -d " " -f 1 | while read package; do echo -n "$package "; apt-cache policy $package | awk "/\*/{getline; print}" | sed "s/ *[0-9]* //" | cut -d " " -f 1; done | column -t'
+alias ssh-katarre='ssh ssh-w00d366c@katarre.de'
 

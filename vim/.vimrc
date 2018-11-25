@@ -1,6 +1,6 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-let mapleader=","             " <leader> is ,
+set nocompatible
+filetype off
+let mapleader=" "
 
 " Vundle init
 set rtp+=~/.vim/bundle/vundle
@@ -24,6 +24,7 @@ Plugin 'tpope/vim-commentary.git'
 Plugin 'chriskempson/base16-vim'
 Plugin 'nelsyeung/twig.vim'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'stephpy/vim-php-cs-fixer'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -110,3 +111,14 @@ set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 "" Search and replace for selected text
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
+"" php-cs-fixer
+"" let g:php_cs_fixer_path = "~/php-cs-fixer.phar" " define the path to the php-cs-fixer.phar
+let g:php_cs_fixer_level = "all"                " which level ?
+let g:php_cs_fixer_config = "default"           " configuration
+let g:php_cs_fixer_php_path = "php"             " Path to PHP
+let g:php_cs_fixer_fixers_list = ""             " List of fixers
+let g:php_cs_fixer_default_mapping = 1          " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 0                  " Call command with dry-run option
+map <leader>pcd :call PhpCsFixerFixDirectory()<CR>
+map <leader>pcf :call PhpCsFixerFixFile()<CR>
