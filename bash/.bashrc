@@ -63,4 +63,4 @@ nls() {
     ls -c ~/owncloud/notes/ | grep "$*"
 }
 
-setxkbmap -option "caps:swapescape"
+# setxkbmap -option "caps:swapescape"
