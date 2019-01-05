@@ -47,20 +47,5 @@ case "$TERM" in
         ;;
 esac
 
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
-#taking notes
-n() {
-    vim ~/owncloud/notes/"$*".md
-}
-
-ncat() {
-    cat ~/owncloud/notes/"$*".md
-}
-
-nls() {
-    ls -c ~/owncloud/notes/ | grep "$*"
-}
-
-setxkbmap -option "caps:swapescape"
+# BASE16_SHELL=$HOME/.config/base16-shell/
+# [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
