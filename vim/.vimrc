@@ -1,6 +1,6 @@
 set nocompatible
 filetype off
-let mapleader=" "
+let mapleader=","
 
 " Vundle init
 set rtp+=~/.vim/bundle/vundle
@@ -18,99 +18,61 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'milkypostman/vim-togglelist'
 Plugin 'tpope/vim-surround'
-Plugin 'blueyed/smarty.vim'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'tpope/vim-commentary.git'
 Plugin 'chriskempson/base16-vim'
 Plugin 'nelsyeung/twig.vim'
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'stephpy/vim-php-cs-fixer'
+Plugin 'w0rp/ale'
 call vundle#end()            " required
 
-filetype plugin indent on    " required
+let base16colorspace=256
+if has("gui_gtk2")
+    set guifont=Monospace\ 11
+endif
 
 autocmd FileType php setlocal commentstring=\/\/\ %s
-set clipboard=unnamedplus " Use standard X register as clipboard
-set mouse=a " Allow mouse
-set autoindent " Use autoindent
-set hidden " switch between buffers without saving
+syntax on
+filetype plugin indent on
 
-""
-" COLORS
-"
-syntax on " Use syntax highlighting
+set clipboard=unnamedplus 
+set mouse=a
+set autoindent
+set hidden
 
-" if has('gui_running')
-let base16colorspace=256
-" set background=light
-" colorscheme base16-atelier-forest
-if has("gui_gtk2")
-    set guifont=Noto\ Mono\ 10
-endif
-" endif
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
 
-""
-" SPACES AND TABS
-"
-set tabstop=4 " Number of visual spaces per TAB
-set softtabstop=4 " Number of spaces per TAB when editing
-set shiftwidth=4 " when indenting with '>', use 4 spaces width
-set expandtab " Tabs are spaces
-
-""
-" UI Config
-"
-set number " show line numbers
-filetype plugin indent on " load plugin-specific indent files
-set wildmenu " visual autocomplete for command menu (e.g. :e ~/.vim[TAB])
-set lazyredraw " redraw only when we need to.
-set showmatch " highlight matching [{()}]
-set cmdheight=2 " Set command line height
-set nowrap " Turn off linewrap
+set number
+set wildmenu
+set lazyredraw
+set showmatch
+set cmdheight=2
+set nowrap
 set laststatus=2
 
-""
-" Searching
-"
-set incsearch " search as characters are entered
-set hlsearch " highlight matches
+set incsearch
+set hlsearch
 
-" Define my own grep command
-command! -nargs=+ Grep execute 'silent grep! -r <args>' | copen | redraw
-
-""
-" Custom
-"
-
-" turn off search highlight with <leader><space>
-nnoremap <leader><space> :nohlsearch<CR>
-
-" NERDTree
-nnoremap <leader>n :NERDTreeToggle<CR>
-let g:NERDTreeQuitOnOpen = 1
-
-" Write as superuser
-cmap w!! w !sudo tee > /dev/null %
-
-" Map ß to $
-nnoremap ß $
-
-" Autoformat document
-nnoremap <leader>f gg=G''
-
-"" Tab triggers buffer-name auto-completion
 set wildchar=<Tab> wildmenu wildmode=full
 
-map <Leader>t :CommandT<Return>
+nnoremap <leader><space> :nohlsearch<CR>
+
 map <Leader>a :bprev<Return>
 map <Leader>s :bnext<Return>
 map <Leader>d :bd<Return>
 
-"" Show the buffer number in the status line.
-set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
-
-"" Search and replace for selected text
+cmap w!! w !sudo tee > /dev/null %
+nnoremap <leader>f gg=G''
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
+"" NERDTree
+nnoremap <leader>t :NERDTreeToggle<CR>
+let g:NERDTreeQuitOnOpen = 1
+
 
 "" php-cs-fixer
 "" let g:php_cs_fixer_path = "~/php-cs-fixer.phar" " define the path to the php-cs-fixer.phar
@@ -122,3 +84,4 @@ let g:php_cs_fixer_default_mapping = 1          " Enable the mapping by default 
 let g:php_cs_fixer_dry_run = 0                  " Call command with dry-run option
 map <leader>pcd :call PhpCsFixerFixDirectory()<CR>
 map <leader>pcf :call PhpCsFixerFixFile()<CR>
+
