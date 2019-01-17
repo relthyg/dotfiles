@@ -1,0 +1,48 @@
+## Openbox autostart.sh
+## ====================
+## When you login to your Openbox session, this autostart script
+## will be executed to set-up your environment and launch any applications
+## you want to run at startup.
+##
+## Note*: some programs, such as 'nm-applet' are run via XDG autostart.
+## Run '/usr/lib/openbox/openbox-xdg-autostart --list' to list any
+## XDG autostarted programs.
+##
+## More information about this can be found at:
+## http://openbox.org/wiki/Help:Autostart
+
+# (hsetroot -solid "#2E3440" && sleep 1s && nitrogen --restore) &
+nitrogen --restore &
+tint2 &
+conky &
+obrx-compositor --start &
+pnmixer &
+xfce4-volumed &
+xfce4-power-manager &
+thunar --daemon &
+clipit &
+numlockx &
+kupfer --no-splash &
+dropbox start &
+owncloud &
+cryptkeeper &
+# eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
+
+## Detect and configure touchpad. See 'man synclient' for more info.
+if grep -i 'touchpad' /proc/bus/input/devices; then
+    synclient VertEdgeScroll=1 &
+    synclient VertHorizScroll=1 &
+    synclient TapButton1=1 &
+
+    # Use evtest to find your personal settings for PalmDetect
+    synclient PalmDetect=1 &
+    synclient PalmMinWidth=8 &
+    synclient PalmMinZ=100 &
+fi
+
+## Keyboard settings - 250 ms delay and 25 cps (characters per second) repeat rate.
+xset r rate 250 25 &
+
+## Turn on/off system beep
+xset b off &
+
