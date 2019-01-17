@@ -25,6 +25,7 @@ Plugin 'nelsyeung/twig.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'stephpy/vim-php-cs-fixer'
 Plugin 'w0rp/ale'
+Plugin 'vim-airline/vim-airline'
 call vundle#end()            " required
 
 let base16colorspace=256
