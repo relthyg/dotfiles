@@ -10,8 +10,10 @@
 ##
 ## More information about this can be found at:
 ## http://openbox.org/wiki/Help:Autostart
-
-# (hsetroot -solid "#2E3440" && sleep 1s && nitrogen --restore) &
+eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
+eval $(ssh-agent) &
+# for file in ~/.ssh/*.pub; do ssh-add $(echo $file | sed s/.pub//g); done
+hsetroot -solid "#2E3440"
 nitrogen --restore &
 tint2 &
 conky &
@@ -26,7 +28,8 @@ kupfer --no-splash &
 dropbox start &
 owncloud &
 cryptkeeper &
-# eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
+xset r rate 250 25 &
+xset b off &
 
 ## Detect and configure touchpad. See 'man synclient' for more info.
 if grep -i 'touchpad' /proc/bus/input/devices; then
@@ -39,10 +42,4 @@ if grep -i 'touchpad' /proc/bus/input/devices; then
     synclient PalmMinWidth=8 &
     synclient PalmMinZ=100 &
 fi
-
-## Keyboard settings - 250 ms delay and 25 cps (characters per second) repeat rate.
-xset r rate 250 25 &
-
-## Turn on/off system beep
-xset b off &
 
