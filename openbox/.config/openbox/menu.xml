@@ -4,7 +4,10 @@
     file:///usr/share/openbox/menu.xsd">
 
     <menu id="root-menu" label="Openbox 3">
-        <!-- <menu execute="xdg-menu" id="xdg-menu" label="xdg-menu"/> -->
+        <menu execute="xdg-menu lxde-applications-custom" id="xdg-menu" label="xdg-menu"/>
+        <separator />
+        <!-- <menu execute="openbox-menu -i lxde-applications.menu" id="openbox-menu" label="openbox-menu"/> -->
+        <!-- <separator /> -->
         <item label="Run Program">
             <action name="Execute">
                 <execute>
@@ -48,9 +51,6 @@
                 </execute>
             </action>
         </item>
-        <separator />
-        <menu id="applications-menu" label="Applications" execute="openbox-menu -i lxde-applications.menu"/>
-        <separator/>
         <menu execute="obrx-places-pipemenu" id="pipe-placesmenu" label="Places"/>
         <menu execute="obrx-recent-files-pipemenu" id="pipe-recentfilesmenu" label="Recent Files"/>
         <separator/>
