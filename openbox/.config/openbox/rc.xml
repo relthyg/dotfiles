@@ -40,7 +40,7 @@
                     'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>Clearlooks-Magpie</name>
+    <name>Clearlooks-Phenix-Mod</name>
     <titleLayout>DSLIMC</titleLayout>
     <!--
       avaible characters are NDSLIMC, each can occur at most once.
@@ -349,9 +349,9 @@
       <action name="Execute">
         <startupnotify>
           <enabled>true</enabled>
-          <name>thunar</name>
+          <name>caja</name>
         </startupnotify>
-        <command>thunar</command>
+        <command>caja</command>
       </action>
     </keybind>
     <keybind key="W-c">
@@ -369,7 +369,7 @@
           <enabled>true</enabled>
           <name>Terminal</name>
         </startupnotify>
-        <command>terminator</command>
+        <command>mate-terminal</command>
       </action>
     </keybind>
     <keybind key="W-w">
