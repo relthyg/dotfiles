@@ -29,8 +29,9 @@ Plugin 'vim-airline/vim-airline'
 call vundle#end()            " required
 
 let base16colorspace=256
+set t_Co=256
 if has("gui_gtk2")
-    set guifont=Monospace\ 11
+    set guifont=Roboto\ Mono\ 11
 endif
 
 autocmd FileType php setlocal commentstring=\/\/\ %s
