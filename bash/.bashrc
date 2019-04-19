@@ -4,6 +4,11 @@ case $- in
     *) return;;
 esac
 
+# local .bashrc
+if [ -f ~/.bashrc.local ]; then
+    . ~/.bashrc.local
+fi
+
 # PATHs
 if [ -f "$HOME/.exports" ]; then
     . "$HOME/.exports"

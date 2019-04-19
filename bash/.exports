@@ -11,8 +11,8 @@ if [ -d "/opt/bin" ] ; then
     export PATH="/opt/bin:$PATH"
 fi
 
-if [ -d "$HOME/.__bin" ] ; then
-    export PATH="$HOME/.__bin:$PATH"
+if [ -d "$HOME/bin" ] ; then
+    export PATH="$HOME/bin:$PATH"
 fi
 
 if [ -d "$HOME/.local/bin" ] ; then
