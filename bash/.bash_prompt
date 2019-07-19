@@ -42,7 +42,7 @@ fi
 
 function git_branch() {
     BRANCH=""
-    BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+    BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' | sed -e 's/(HEAD detached at //' | sed -e 's/)//'`
     echo "$BRANCH"
 }
 
