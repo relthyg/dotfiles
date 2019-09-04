@@ -23,19 +23,16 @@ if [ -d "$HOME/.composer/vendor/bin" ] ; then
     export PATH="$HOME/.composer/vendor/bin:$PATH"
 fi
 
-# Ruby Gems
-# export GEM_HOME=~/.gem
-# export GEM_PATH=~/.gem
-# if [ -d "$GEM_HOME/ruby/2.3.0/bin" ] ; then
-#     export PATH="$HOME/.gem/ruby/2.3.0/bin:$PATH"
-# fi
-
 # Node packages
 NPM_CONFIG_PREFIX="${HOME}/.npm-packages"
 if [ -d "$NPM_CONFIG_PREFIX/bin" ] ; then
     export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
     unset MANPATH
     export MANPATH="$NPM_CONFIG_PREFIX/share/man:$(manpath)"
+fi
+
+if [ -d "$HOME/bin" ] ; then
+    export PATH="$HOME/bin:$PATH"
 fi
 
 # Locales
@@ -54,7 +51,4 @@ export LC_TELEPHONE=en_US.UTF-8
 export LC_MEASUREMENT=en_US.UTF-8
 export LC_IDENTIFICATION=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-
-# Allow all Chromium extensions
-export CHROMIUM_FLAGS='--enable-remote-extensions'
 

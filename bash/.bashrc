@@ -4,6 +4,11 @@ case $- in
     *) return;;
 esac
 
+# local .bashrc
+if [ -f ~/.bashrc.local ]; then
+    . ~/.bashrc.local
+fi
+
 # PATHs
 if [ -f "$HOME/.exports" ]; then
     . "$HOME/.exports"
@@ -12,11 +17,6 @@ fi
 # Aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
-fi
-
-# include other stuff, if given
-if [ -f ~/.bash_other ]; then
-    . ~/.bash_other
 fi
 
 HISTCONTROL=ignoreboth
@@ -47,20 +47,7 @@ case "$TERM" in
         ;;
 esac
 
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+#BASE16_SHELL=$HOME/.config/base16-shell/
+#[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+#setxkbmap -option "caps:swapescape"
 
-#taking notes
-n() {
-    vim ~/owncloud/notes/"$*".md
-}
-
-ncat() {
-    cat ~/owncloud/notes/"$*".md
-}
-
-nls() {
-    ls -c ~/owncloud/notes/ | grep "$*"
-}
-
-# setxkbmap -option "caps:swapescape"

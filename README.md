@@ -26,12 +26,12 @@ Next, open a new shell and type `base16` followed by a tab to perform tab comple
 For further information, visit: [https://github.com/chriskempson/base16-shell](https://github.com/chriskempson/base16-shell)
 
 ## Submodules
-Install an initialize git submodules:
+Install and initialize git submodules:
 
 ```
 git submodule add https://github.com/VundleVim/Vundle.vim.git vim/.vim/bundle/vundle
-git init
-git update
+git submodule init
+git submodule update
 ```
 
 ## Vim Plugins
