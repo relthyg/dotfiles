@@ -27,8 +27,10 @@ BCYAN='\[\033[1;36m\]'
 BWHITE='\[\033[1;37m\]' 	
 
 # Username color should be white except for root
-USERCOL=${BGREEN}
-[[ ${UID} == 0 ]] && USERCOL=${BRED}
+USERCOLOR=${GREEN}
+[[ ${UID} == 0 ]] && USERCOLOR=${RED}
+HOSTNAMECOLOR=${BLUE}
+PATHCOLOR=${PURPLE}
 
 # prompt variables
 # you can also use system varibles like ${USER}, ${HOSTNAME} etc...
@@ -48,14 +50,8 @@ function git_branch() {
 
 function git_git () {
     GIT=""
-    [[ ! `git_branch` == "" ]] && GIT="git"
+    # [[ ! `git_branch` == "" ]] && GIT="git"
     echo "$GIT"
-}
-
-function git_colon () {
-    COLON=""
-    [[ ! `git_branch` == "" ]] && COLON=":"
-    echo "$COLON"
 }
 
 function git_bits() {
@@ -86,10 +82,17 @@ function git_bits() {
         if [ "${DIRTY}" == "0" ]; then
             BITS="!${BITS}"
         fi
+        [[ ! ${BITS} == "" ]] && BITS=" ${BITS}"
         BITS="${BITS} "
     fi
     echo "$BITS"
 }
 
+function git_colon () {
+    COLON=""
+    [[ ! `git_bits` == "" ]] && COLON=":"
+    echo "$COLON"
+}
+
 # prompt the prompt
-export PS1="${debian_chroot:+($debian_chroot)}${USERCOL}${USER}@${HOSTNAME}${RESET} ${BBLUE}${FULLPATH} ${BPURPLE}\`git_git\`${RESET}\`git_colon\`${BYELLOW}\`git_branch\`${BRED}\`git_bits\`${RESET}> ${RESET}"
+export PS1="${debian_chroot:+($debian_chroot)}${USERCOLOR}${USER}${WHITE}@${HOSTNAMECOLOR}${HOSTNAME}${WHITE}:${PATHCOLOR}${FULLPATH} ${YELLOW}\`git_branch\`${RED}\`git_bits\`${WHITE}> ${RESET}"
