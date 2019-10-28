@@ -27,31 +27,21 @@ BCYAN='\[\033[1;36m\]'
 BWHITE='\[\033[1;37m\]' 	
 
 # Username color should be white except for root
-USERCOLOR=${GREEN}
-[[ ${UID} == 0 ]] && USERCOLOR=${RED}
-HOSTNAMECOLOR=${BLUE}
-PATHCOLOR=${PURPLE}
+USERCOLOR=${BGREEN}
+[[ ${UID} == 0 ]] && USERCOLOR=${BRED}
+HOSTNAMECOLOR=${BBLUE}
+PATHCOLOR=${BPURPLE}
+CHARCOLOR=${BWHITE}
 
 # prompt variables
 # you can also use system varibles like ${USER}, ${HOSTNAME} etc...
 FULLPATH='\w' # Full path to current directory
 DIRECTORY='\W' # Name of current directory
 
-# set variable identifying the chroot you work in
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot="$(cat /etc/debian_chroot) "
-fi
-
 function git_branch() {
     BRANCH=""
     BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' | sed -e 's/(HEAD detached //' | sed -e 's/)//' | sed -e 's/at//' | sed -e 's/from//'`
     echo "$BRANCH"
-}
-
-function git_git () {
-    GIT=""
-    # [[ ! `git_branch` == "" ]] && GIT="git"
-    echo "$GIT"
 }
 
 function git_bits() {
@@ -95,4 +85,4 @@ function git_colon () {
 }
 
 # prompt the prompt
-export PS1="${debian_chroot:+($debian_chroot)}${USERCOLOR}${USER}${WHITE}@${HOSTNAMECOLOR}${HOSTNAME}${WHITE}:${PATHCOLOR}${FULLPATH} ${YELLOW}\`git_branch\`${RED}\`git_bits\`${WHITE}> ${RESET}"
+export PS1="${USERCOLOR}${USER}${CHARCOLOR}@${HOSTNAMECOLOR}${HOSTNAME}${CHARCOLOR}:${PATHCOLOR}${FULLPATH} ${BYELLOW}\`git_branch\`${BRED}\`git_bits\`${CHARCOLOR}> ${RESET}"
