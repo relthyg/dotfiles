@@ -37,6 +37,7 @@ CHARCOLOR=${BWHITE}
 # you can also use system varibles like ${USER}, ${HOSTNAME} etc...
 FULLPATH='\w' # Full path to current directory
 DIRECTORY='\W' # Name of current directory
+USER=`whoami` # "USER" could differ from active user's name in Arch Linux
 
 function git_branch() {
     BRANCH=""
