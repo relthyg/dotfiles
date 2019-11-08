@@ -8,7 +8,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-alias ll='ls -l'
+alias 1='ls -1'
+alias l='ls -l'
 alias la='ls -la'
 alias ..='cd ..'
 alias ...='cd ../..'

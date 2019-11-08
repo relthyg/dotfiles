@@ -27,35 +27,22 @@ BCYAN='\[\033[1;36m\]'
 BWHITE='\[\033[1;37m\]' 	
 
 # Username color should be white except for root
-USERCOL=${BGREEN}
-[[ ${UID} == 0 ]] && USERCOL=${BRED}
+USERCOLOR=${BGREEN}
+[[ ${UID} == 0 ]] && USERCOLOR=${BRED}
+HOSTNAMECOLOR=${BBLUE}
+PATHCOLOR=${BPURPLE}
+CHARCOLOR=${BWHITE}
 
 # prompt variables
 # you can also use system varibles like ${USER}, ${HOSTNAME} etc...
 FULLPATH='\w' # Full path to current directory
 DIRECTORY='\W' # Name of current directory
-
-# set variable identifying the chroot you work in
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot="$(cat /etc/debian_chroot) "
-fi
+USER=`whoami` # "USER" could differ from active user's name in Arch Linux
 
 function git_branch() {
     BRANCH=""
-    BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' | sed -e 's/(HEAD detached at //' | sed -e 's/)//'`
+    BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' | sed -e 's/(HEAD detached //' | sed -e 's/)//' | sed -e 's/at //' | sed -e 's/from //'`
     echo "$BRANCH"
-}
-
-function git_git () {
-    GIT=""
-    [[ ! `git_branch` == "" ]] && GIT="git"
-    echo "$GIT"
-}
-
-function git_colon () {
-    COLON=""
-    [[ ! `git_branch` == "" ]] && COLON=":"
-    echo "$COLON"
 }
 
 function git_bits() {
@@ -86,10 +73,17 @@ function git_bits() {
         if [ "${DIRTY}" == "0" ]; then
             BITS="!${BITS}"
         fi
+        [[ ! ${BITS} == "" ]] && BITS=" ${BITS}"
         BITS="${BITS} "
     fi
     echo "$BITS"
 }
 
+function git_colon () {
+    COLON=""
+    [[ ! `git_bits` == "" ]] && COLON=":"
+    echo "$COLON"
+}
+
 # prompt the prompt
-export PS1="${debian_chroot:+($debian_chroot)}${USERCOL}${USER}@${HOSTNAME}${RESET} ${BBLUE}${FULLPATH} ${BPURPLE}\`git_git\`${RESET}\`git_colon\`${BYELLOW}\`git_branch\`${BRED}\`git_bits\`${RESET}> ${RESET}"
+export PS1="${USERCOLOR}${USER}${CHARCOLOR}@${HOSTNAMECOLOR}${HOSTNAME}${CHARCOLOR}:${PATHCOLOR}${FULLPATH} ${BYELLOW}\`git_branch\`${BRED}\`git_bits\`${CHARCOLOR}> ${RESET}"

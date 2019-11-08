@@ -1,39 +1,9 @@
-# Some binary paths
-if [ -d "/sbin" ] ; then
-    PATH="/sbin:$PATH"
-fi
-
-if [ -d "/usr/sbin" ] ; then
-    PATH="/usr/sbin:$PATH"
-fi
-
-if [ -d "/opt/bin" ] ; then
-    export PATH="/opt/bin:$PATH"
-fi
-
-if [ -d "$HOME/bin" ] ; then
-    export PATH="$HOME/bin:$PATH"
-fi
-
-if [ -d "$HOME/.local/bin" ] ; then
-    export PATH="$HOME/.local/bin:$PATH"
-fi
-
-if [ -d "$HOME/.composer/vendor/bin" ] ; then
-    export PATH="$HOME/.composer/vendor/bin:$PATH"
-fi
-
-# Node packages
-NPM_CONFIG_PREFIX="${HOME}/.npm-packages"
-if [ -d "$NPM_CONFIG_PREFIX/bin" ] ; then
-    export PATH="$NPM_CONFIG_PREFIX/bin:$PATH"
-    unset MANPATH
-    export MANPATH="$NPM_CONFIG_PREFIX/share/man:$(manpath)"
-fi
-
-if [ -d "$HOME/bin" ] ; then
-    export PATH="$HOME/bin:$PATH"
-fi
+DIRS=(/sbin /user/sbin /opt/bin $HOME/bin $HOME/.local/bin $HOME/.composer/vendor/bin)
+for DIR in ${DIRS[@]}
+do
+    [[ -d $DIR ]] && PATH="$DIR:$PATH"
+done
+export PATH
 
 # Locales
 export LANG=en_US.UTF-8
