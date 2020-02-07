@@ -49,7 +49,7 @@ set wildmenu
 set lazyredraw
 set showmatch
 set cmdheight=2
-set nowrap
+set wrap linebreak nolist
 set laststatus=2
 
 set incsearch
