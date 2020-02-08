@@ -1,4 +1,6 @@
-DIRS=(/sbin /user/sbin /opt/bin $HOME/bin $HOME/.local/bin $HOME/.composer/vendor/bin)
+export EDITOR=vim
+
+DIRS=(/sbin /user/sbin /opt/bin $HOME/bin $HOME/.local/bin $HOME/.composer/vendor/bin $HOME/.gem/ruby/*/bin)
 for DIR in ${DIRS[@]}
 do
     [[ -d $DIR ]] && PATH="$DIR:$PATH"
