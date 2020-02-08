@@ -38,7 +38,12 @@ autocmd FileType php setlocal commentstring=\/\/\ %s
 syntax on
 filetype plugin indent on
 
-set clipboard=unnamedplus 
+if system('uname -s') == "Darwin\n"
+  set clipboard=unnamed "OSX
+else
+  set clipboard=unnamedplus "Linux
+endif
+
 set mouse=a
 set autoindent
 set hidden
