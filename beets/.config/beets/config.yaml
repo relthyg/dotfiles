@@ -1,12 +1,10 @@
 directory: ~/music/beets
 library: ~/music/beets/library.db
+pluginpath: ~/projects/beetsplug/beetsplug
 plugins: morefields inline the info multidisc
 
 original_date: yes
 per_disc_numbering: yes
-
-pluginpath:
-    - ~/projects/beetsplug/beetsplug
 
 import:
     move: no
@@ -21,13 +19,17 @@ match:
         original_year: yes
 
 paths:
-    default: "%the{$albumartist}/$year - $album\
+    default: "%the{$albumartist}/\
+              \
+              $year - $album\
               %if{$multidisc,,%if{$disctitle, ($disctitle)}}\
               %if{$albumdisambig, ($albumdisambig)}\
               %ifdef{source, ($source)}\
-              %aunique{} $format_string\
-              /\
+              %aunique{}\
+              %if{$multidisc,, $format_string}/\
+              \
               %if{$multidisc,Disc $disc%if{$disctitle, ($disctitle)} $format_string/}\
+              \
               $track - $title"
 
     singleton: Non-Album/$artist/$title
@@ -44,8 +46,13 @@ aunique:
 item_fields:
     multidisc: 1 if disctotal > 1 else 0
     format_string: |
-        bitdepth_string = f' {str(bitdepth)}bit-' if bitdepth else ' '
-        return f'[{format}{bitdepth_string}{str(samplerate/1000)}kHz]'
+        samplerate_string = bitdepth_string = ''
+
+        if samplerate != 44100:
+            samplerate_string = f' {str(samplerate/1000)}'
+            bitdepth_string = f'-{str(bitdepth)}' if bitdepth else ''
+
+        return f'[{format}{samplerate_string}{bitdepth_string}]'
 
 
 album_fields:  
