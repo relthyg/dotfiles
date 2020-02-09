@@ -41,7 +41,7 @@ USER=`whoami` # "USER" could differ from active user's name in Arch Linux
 
 function git_branch() {
     BRANCH=""
-    BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' | sed -e 's/(HEAD detached //' | sed -e 's/)//' | sed -e 's/at//' | sed -e 's/from//'`
+    BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' | sed -e 's/(HEAD detached //' | sed -e 's/)//' | sed -e 's/at //' | sed -e 's/from //'`
     echo "$BRANCH"
 }
 
