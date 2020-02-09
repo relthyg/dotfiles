@@ -1,0 +1,59 @@
+directory: ~/music/beets
+library: ~/music/beets/library.db
+plugins: morefields inline the info multidisc
+
+original_date: yes
+per_disc_numbering: yes
+
+pluginpath:
+    - ~/projects/beetsplug/beetsplug
+
+import:
+    move: no
+    timid: yes
+    quiet_fallback: asis
+
+musicbrainz:
+    searchlimit: 25
+
+match:
+    preferred:
+        original_year: yes
+
+paths:
+    default: "%the{$albumartist}/$year - $album\
+              %if{$multidisc,,%if{$disctitle, ($disctitle)}}\
+              %if{$albumdisambig, ($albumdisambig)}\
+              %ifdef{source, ($source)}\
+              %aunique{} $format_string\
+              /\
+              %if{$multidisc,Disc $disc%if{$disctitle, ($disctitle)} $format_string/}\
+              $track - $title"
+
+    singleton: Non-Album/$artist/$title
+
+    albumtype:soundtrack: Soundtracks/$album%aunique%ifdef{source, [$source]}/%if{$multidisc,Disc $disc/}$track - $artist - $title
+
+    comp: Compilations/$album%aunique{}%ifdef{source, [$source]}/%if{$multidisc,Disc $disc/}$track - $artist - $title
+
+aunique:
+    keys: albumartist album
+    disambiguators: albumtype year label catalognum albumdisambig releasegroupdisambig media
+    bracket: '[]'
+
+item_fields:
+    multidisc: 1 if disctotal > 1 else 0
+    format_string: |
+        bitdepth_string = f' {str(bitdepth)}bit-' if bitdepth else ' '
+        return f'[{format}{bitdepth_string}{str(samplerate/1000)}kHz]'
+
+
+album_fields:  
+    albumformat: |
+        return items[0].format
+    albumbitrate: |
+        total = 0
+        for item in items:
+            total += item.bitrate
+        return round(total / len(items) / 1000)
+
