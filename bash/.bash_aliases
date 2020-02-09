@@ -15,3 +15,5 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+alias backup-bin="rsync -av --delete ~/bin/ ~/nextcloud/code/bin/"
+

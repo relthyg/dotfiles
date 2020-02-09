@@ -5,6 +5,8 @@ do
 done
 export PATH
 
+[[ -f $HOME/.config/user-dirs.dirs ]] && . $HOME/.config/user-dirs.dirs
+
 # Locales
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.utf8
@@ -21,4 +23,3 @@ export LC_TELEPHONE=en_US.UTF-8
 export LC_MEASUREMENT=en_US.UTF-8
 export LC_IDENTIFICATION=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-
