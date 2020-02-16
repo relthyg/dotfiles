@@ -26,9 +26,9 @@ paths:
               %if{$albumdisambig, ($albumdisambig)}\
               %ifdef{source, ($source)}\
               %aunique{}\
-              %if{$multidisc,, $format_string}/\
+              %if{$multidisc,,$format_string}/\
               \
-              %if{$multidisc,Disc $disc%if{$disctitle, ($disctitle)} $format_string/}\
+              %if{$multidisc,Disc $disc%if{$disctitle, ($disctitle)}$format_string/}\
               \
               $track - $title"
 
@@ -45,22 +45,26 @@ aunique:
 
 item_fields:
     multidisc: 1 if disctotal > 1 else 0
+
     format_string: |
-        samplerate_string = bitdepth_string = ''
+        items = []
+
+        if media != 'CD' and media != '':
+            items.append(media)
+
+        if format != 'FLAC':
+            items.append(format)
 
         if samplerate != 44100:
-            samplerate_string = f' {str(samplerate/1000)}'
+            samplerate_string = f'{str(samplerate/1000).replace(".0", "")}'
             bitdepth_string = f'-{str(bitdepth)}' if bitdepth else ''
+            items.append(samplerate_string + bitdepth_string)
 
-        return f'[{format}{samplerate_string}{bitdepth_string}]'
+        if channels != 2:
+            items.append(f'{str(channels)}ch')
 
+        if len(items) > 0:
+            return f' [{", ".join(items)}]'
 
-album_fields:  
-    albumformat: |
-        return items[0].format
-    albumbitrate: |
-        total = 0
-        for item in items:
-            total += item.bitrate
-        return round(total / len(items) / 1000)
+        return ''
 
