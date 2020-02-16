@@ -1,7 +1,7 @@
 directory: ~/music/beets
 library: ~/music/beets/library.db
 pluginpath: ~/projects/beetsplug/beetsplug
-plugins: morefields inline the info multidisc
+plugins: inline the info custom_album_tag
 
 original_date: yes
 per_disc_numbering: yes
@@ -24,7 +24,6 @@ paths:
               $year - $album\
               %if{$multidisc,,%if{$disctitle, ($disctitle)}}\
               %if{$albumdisambig, ($albumdisambig)}\
-              %ifdef{source, ($source)}\
               %aunique{}\
               %if{$multidisc,,$format_string}/\
               \
@@ -47,24 +46,24 @@ item_fields:
     multidisc: 1 if disctotal > 1 else 0
 
     format_string: |
-        items = []
+        format_string_items = []
 
-        if media != 'CD' and media != '':
-            items.append(media)
+        if media != '':
+            format_string_items.append(media)
 
         if format != 'FLAC':
-            items.append(format)
+            format_string_items.append(format)
 
         if samplerate != 44100:
             samplerate_string = f'{str(samplerate/1000).replace(".0", "")}'
             bitdepth_string = f'-{str(bitdepth)}' if bitdepth else ''
-            items.append(samplerate_string + bitdepth_string)
+            format_string_items.append(samplerate_string + bitdepth_string)
 
         if channels != 2:
-            items.append(f'{str(channels)}ch')
+            format_string_items.append(f'{str(channels)}ch')
 
-        if len(items) > 0:
-            return f' [{", ".join(items)}]'
+        if len(format_string_items) > 0:
+            return f' [{", ".join(format_string_items)}]'
 
         return ''
 
