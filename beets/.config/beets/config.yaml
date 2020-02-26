@@ -1,7 +1,6 @@
 directory: ~/music/beets
 library: ~/music/beets/library.db
-pluginpath: ~/projects/beetsplug/beetsplug
-plugins: inline the info custom_album_tag
+plugins: inline the info custom_album_tag kitchen_sink
 
 original_date: yes
 per_disc_numbering: yes
@@ -46,24 +45,15 @@ item_fields:
     multidisc: 1 if disctotal > 1 else 0
 
     format_string: |
-        format_string_items = []
+        from beets.library import Item
+        from beetsplug.custom_album_tag import format_string
 
-        if media != '':
-            format_string_items.append(media)
+        item = Item()
+        item.media = media
+        item.format = format
+        item.samplerate = samplerate
+        item.bitdepth = bitdepth
+        item.channels = channels
 
-        if format != 'FLAC':
-            format_string_items.append(format)
-
-        if samplerate != 44100:
-            samplerate_string = f'{str(samplerate/1000).replace(".0", "")}'
-            bitdepth_string = f'-{str(bitdepth)}' if bitdepth else ''
-            format_string_items.append(samplerate_string + bitdepth_string)
-
-        if channels != 2:
-            format_string_items.append(f'{str(channels)}ch')
-
-        if len(format_string_items) > 0:
-            return f' [{", ".join(format_string_items)}]'
-
-        return ''
+        return format_string(item)
 
