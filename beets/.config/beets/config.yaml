@@ -1,6 +1,6 @@
 directory: ~/music/beets
 library: ~/music/beets/library.db
-plugins: inline the info custom_album_tag kitchen_sink kodiupdate
+plugins: inline the info custom_album_tag kodiupdate
 
 original_date: yes
 per_disc_numbering: yes
@@ -8,6 +8,7 @@ per_disc_numbering: yes
 import:
     move: yes
     timid: yes
+    from_scratch: yes
     quiet_fallback: asis
 
 kodi:
@@ -17,7 +18,7 @@ kodi:
     pwd: kodi
 
 musicbrainz:
-    searchlimit: 25
+    searchlimit: 10
 
 match:
     preferred:
@@ -49,17 +50,4 @@ aunique:
 
 item_fields:
     multidisc: 1 if disctotal > 1 else 0
-
-    format_string: |
-        from beets.library import Item
-        from beetsplug.custom_album_tag import format_string
-
-        item = Item()
-        item.media = media
-        item.format = format
-        item.samplerate = samplerate
-        item.bitdepth = bitdepth
-        item.channels = channels
-
-        return format_string(item)
 
