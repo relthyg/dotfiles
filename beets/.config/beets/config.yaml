@@ -1,13 +1,14 @@
 directory: ~/music/beets
 library: ~/music/beets/library.db
-plugins: inline the info custom_album_tag kodiupdate
+plugins: inline the info custom_album_tag kodiupdate discogs
 
 original_date: yes
 per_disc_numbering: yes
+asciify_paths: yes
 
 import:
     move: yes
-    timid: yes
+    timid: no
     from_scratch: yes
     quiet_fallback: asis
 
@@ -18,7 +19,7 @@ kodi:
     pwd: kodi
 
 musicbrainz:
-    searchlimit: 10
+    searchlimit: 5
 
 match:
     preferred:
@@ -29,13 +30,11 @@ paths:
               \
               $year - $album\
               %if{$multidisc,,%if{$disctitle, ($disctitle)}}\
-              %if{$albumdisambig, ($albumdisambig)}\
-              %aunique{}\
-              %if{$multidisc,,$format_string}/\
+              %aunique{}/\
               \
-              %if{$multidisc,Disc $disc%if{$disctitle, ($disctitle)}$format_string/}\
+              %if{$multidisc,Disc $disc%if{$disctitle, ($disctitle)}/}\
               \
-              $track - $title"
+              $track $title"
 
     singleton: Non-Album/$artist/$title
 
