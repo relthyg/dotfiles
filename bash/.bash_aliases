@@ -10,7 +10,7 @@ fi
 
 alias 1='ls -1'
 alias l='ls -l'
-alias la='ls -la'
+alias ll='ls -la'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'

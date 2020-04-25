@@ -1,14 +1,15 @@
 directory: ~/music/beets
 library: ~/music/beets/library.db
-plugins: inline the info custom_album_tag kodiupdate discogs
+plugins: inline the info custom_album_tag
 
 original_date: yes
 per_disc_numbering: yes
 asciify_paths: yes
 
 import:
-    move: yes
-    timid: no
+    move: no
+    copy: yes
+    timid: yes
     from_scratch: yes
     quiet_fallback: asis
 
