@@ -4,7 +4,7 @@ plugins: inline the info custom_album_tag
 
 original_date: no
 per_disc_numbering: yes
-asciify_paths: yes
+asciify_paths: no
 
 import:
     move: no
