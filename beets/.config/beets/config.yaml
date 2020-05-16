@@ -2,7 +2,7 @@ directory: ~/music/beets
 library: ~/music/beets/library.db
 plugins: inline the info custom_album_tag
 
-original_date: yes
+original_date: no
 per_disc_numbering: yes
 asciify_paths: yes
 
@@ -20,16 +20,18 @@ kodi:
     pwd: kodi
 
 musicbrainz:
-    searchlimit: 5
+    searchlimit: 10
 
 match:
     preferred:
+        countries: ['DE', 'XE', 'XW', 'GB|U|UKK', 'US']
+        media: ['Digital Media|File', 'CD']
         original_year: yes
 
 paths:
     default: "%the{$albumartist}/\
               \
-              $year - $album\
+              $original_year - $album\
               %if{$multidisc,,%if{$disctitle, ($disctitle)}}\
               %aunique{}/\
               \
@@ -43,9 +45,10 @@ paths:
 
     comp: Compilations/$album%aunique{}%ifdef{source, [$source]}/%if{$multidisc,Disc $disc/}$track - $artist - $title
 
+# (1989, EMI, Parlophone, UK, CDP 7 92407 2)
 aunique:
     keys: albumartist album
-    disambiguators: albumtype year label catalognum albumdisambig releasegroupdisambig media
+    disambiguators: release_year media label country catalognum albumdisambig releasegroupdisambig
     bracket: '[]'
 
 item_fields:
