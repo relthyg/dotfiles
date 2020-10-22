@@ -97,5 +97,5 @@ function git_closing () {
     echo -n "$CLOSING"
 }
 
-export PS1="${USERCOLOR}\u${CHARCOLOR}@${HOSTNAMECOLOR}\h${CHARCOLOR}:${PATHCOLOR}\W ${CHARCOLOR}\`git_opening\`${BYELLOW}\`git_branch\`${CHARCOLOR}\`git_colon\`${BRED}\`git_bits\`${CHARCOLOR}\`git_closing\`${CHARCOLOR}> ${RESET}"
+export PS1="${USERCOLOR}\u${CHARCOLOR}@${HOSTNAMECOLOR}\h${CHARCOLOR}:${PATHCOLOR}${FULLPATH} ${CHARCOLOR}\`git_opening\`${BYELLOW}\`git_branch\`${CHARCOLOR}\`git_colon\`${BRED}\`git_bits\`${CHARCOLOR}\`git_closing\`${CHARCOLOR}> ${RESET}"
 
