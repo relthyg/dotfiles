@@ -31,7 +31,7 @@ USERCOLOR=${BGREEN}
 [[ ${UID} == 0 ]] && USERCOLOR=${BRED}
 HOSTNAMECOLOR=${BBLUE}
 PATHCOLOR=${BPURPLE}
-CHARCOLOR=${BWHITE}
+CHARCOLOR=${WHITE}
 
 # prompt variables
 # you can also use system varibles like ${USER}, ${HOSTNAME} etc...
@@ -42,7 +42,7 @@ USER=`whoami` # "USER" could differ from active user's name in Arch Linux
 function git_branch() {
     BRANCH=""
     BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/' | sed -e 's/(HEAD detached //' | sed -e 's/)//' | sed -e 's/at //' | sed -e 's/from //'`
-    echo "$BRANCH"
+    echo -n "$BRANCH"
 }
 
 function git_bits() {
@@ -73,17 +73,29 @@ function git_bits() {
         if [ "${DIRTY}" == "0" ]; then
             BITS="!${BITS}"
         fi
-        [[ ! ${BITS} == "" ]] && BITS=" ${BITS}"
-        BITS="${BITS} "
+        [[ ! ${BITS} == "" ]] && BITS="${BITS}"
+        BITS="${BITS}"
     fi
-    echo "$BITS"
+    echo -n "$BITS"
 }
 
 function git_colon () {
     COLON=""
     [[ ! `git_bits` == "" ]] && COLON=":"
-    echo "$COLON"
+    echo -n "$COLON"
 }
 
-# prompt the prompt
-export PS1="${USERCOLOR}${USER}${CHARCOLOR}@${HOSTNAMECOLOR}${HOSTNAME}${CHARCOLOR}:${PATHCOLOR}${FULLPATH} ${BYELLOW}\`git_branch\`${BRED}\`git_bits\`${CHARCOLOR}> ${RESET}"
+function git_opening () {
+    OPENING=""
+    [[ ! `git_branch` == "" ]] && OPENING="["
+    echo -n "$OPENING"
+}
+
+function git_closing () {
+    CLOSING=""
+    [[ ! `git_branch` == "" ]] && CLOSING="] "
+    echo -n "$CLOSING"
+}
+
+export PS1="${USERCOLOR}\u${CHARCOLOR}@${HOSTNAMECOLOR}\h${CHARCOLOR}:${PATHCOLOR}\W ${CHARCOLOR}\`git_opening\`${BYELLOW}\`git_branch\`${CHARCOLOR}\`git_colon\`${BRED}\`git_bits\`${CHARCOLOR}\`git_closing\`${CHARCOLOR}> ${RESET}"
+
