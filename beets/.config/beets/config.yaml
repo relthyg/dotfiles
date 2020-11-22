@@ -1,14 +1,15 @@
 directory: ~/music/beets
 library: ~/music/beets/library.db
-plugins: inline the info custom_album_tag
+plugins: inline the info custom_album_tag fetchart embedart kodiupdate
 
 original_date: no
 per_disc_numbering: yes
 asciify_paths: no
+clutter: [Thumbs.DB, .DS_Store]
 
 import:
-    move: no
-    copy: yes
+    move: yes
+    copy: no
     timid: yes
     from_scratch: yes
     quiet_fallback: asis
