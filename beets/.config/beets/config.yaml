@@ -10,7 +10,7 @@ clutter: [Thumbs.DB, .DS_Store]
 import:
     move: yes
     copy: no
-    timid: yes
+    timid: no
     from_scratch: yes
     quiet_fallback: asis
 
@@ -24,6 +24,7 @@ musicbrainz:
     searchlimit: 10
 
 match:
+    strong_rec_thresh: 0.07
     preferred:
         countries: ['DE', 'XE', 'XW', 'GB|U|UKK', 'US']
         media: ['Digital Media|File', 'CD']
