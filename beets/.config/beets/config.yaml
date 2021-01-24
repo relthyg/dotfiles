@@ -43,7 +43,7 @@ paths:
 
     singleton: Non-Album/$artist/$title
 
-    albumtype:soundtrack: Soundtracks/$album%aunique%ifdef{source, [$source]}/%if{$multidisc,Disc $disc/}$track - $artist - $title
+    albumtype:soundtrack: Soundtracks/$album%aunique{}%ifdef{source, [$source]}/%if{$multidisc,Disc $disc/}$track - $artist - $title
 
     comp: Compilations/$album%aunique{}%ifdef{source, [$source]}/%if{$multidisc,Disc $disc/}$track - $artist - $title
 
