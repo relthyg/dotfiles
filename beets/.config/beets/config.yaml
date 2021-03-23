@@ -1,6 +1,6 @@
 directory: ~/music/beets
 library: ~/music/beets/library.db
-plugins: inline the info fetchart embedart discogs album_appendix
+plugins: inline the info fetchart embedart discogs kodiupdate album_appendix
 
 original_date: no
 per_disc_numbering: yes
@@ -26,7 +26,7 @@ musicbrainz:
 match:
     strong_rec_thresh: 0.07
     preferred:
-        countries: ['DE', 'XE', 'XW', 'GB|U|UKK', 'US']
+        countries: ['DE', 'XE', 'XW', 'GB|UK', 'US']
         media: ['Digital Media|File', 'CD']
         original_year: yes
 
