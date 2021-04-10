@@ -12,7 +12,7 @@ import:
     copy: no
     timid: no
     from_scratch: yes
-    quiet_fallback: asis
+    quiet_fallback: skip
 
 kodi:
     host: localhost
