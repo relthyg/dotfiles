@@ -1,0 +1,9 @@
+plugins: inline the info
+
+import:
+    move: no
+    copy: no
+    write: no
+    autotag: no
+    from_scratch: no
+

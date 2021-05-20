@@ -1,8 +1,8 @@
 directory: ~/music/beets
 library: ~/music/beets/library.db
-plugins: inline the info fetchart embedart discogs kodiupdate album_appendix
+plugins: inline the info fetchart embedart album_appendix
 
-original_date: no
+original_date: yes
 per_disc_numbering: yes
 asciify_paths: no
 clutter: [Thumbs.DB, .DS_Store]
@@ -10,9 +10,11 @@ clutter: [Thumbs.DB, .DS_Store]
 import:
     move: yes
     copy: no
-    timid: no
+    write: yes
+    autotag: yes
     from_scratch: yes
     quiet_fallback: skip
+    log: ~/music/beets/import.log
 
 kodi:
     host: localhost
@@ -28,7 +30,8 @@ match:
     preferred:
         countries: ['DE', 'XE', 'XW', 'GB|UK', 'US']
         media: ['Digital Media|File', 'CD']
-        original_year: yes
+        original_year: no
+    ignored: missing_tracks unmatched_tracks
 
 paths:
     default: "%the{$albumartist}/\
@@ -43,7 +46,7 @@ paths:
 
     singleton: Non-Album/$artist/$title
 
-    albumtype:soundtrack: Soundtracks/$album%aunique{}%ifdef{source, [$source]}/%if{$multidisc,Disc $disc/}$track - $artist - $title
+    # albumtype:soundtrack: Soundtracks/$album%aunique{}%ifdef{source, [$source]}/%if{$multidisc,Disc $disc/}$track - $artist - $title
 
     comp: Compilations/$album%aunique{}%ifdef{source, [$source]}/%if{$multidisc,Disc $disc/}$track - $artist - $title
 
