@@ -36,7 +36,7 @@ match:
 paths:
     default: "%the{$albumartist}/\
               \
-              $original_year - $album\
+              $year - $album\
               %if{$multidisc,,%if{$disctitle, ($disctitle)}}\
               %aunique{}/\
               \
