@@ -32,6 +32,7 @@ match:
         media: ['Digital Media|File', 'CD']
         original_year: no
     ignored: missing_tracks unmatched_tracks
+    ignore_video_tracks: no
 
 paths:
     default: "%the{$albumartist}/\
